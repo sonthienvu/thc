@@ -10,12 +10,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: items
+      items: items,
     };
   }
+  handleDelete(id) {
 
+  }
   render() {
-    
     let items = this.state.items;
     return (
       <div className="App container">
@@ -24,7 +25,9 @@ class App extends Component {
 
         <Form />
         
-        <List items={items}/>
+        <List 
+        onClickDelete={this.handleDelete}
+        items={items}/>
       </div>
     );
   }

@@ -12,11 +12,10 @@ class List extends Component {
         const items = this.props.items;
         const elmItem = items.map((item, index)=> {
             return (
-                <ListItem key={index} item = {item}/>
+                <ListItem key={index} item={item} index={index}/>
             );
         });
-
-      return (
+        return (
         <div className="List-content">
             <table className="table">
             <thead>
@@ -34,7 +33,7 @@ class List extends Component {
             </tbody>
             </table>      
         </div>
-      )
-    };
+        )
+    }
 }
 export default List;
