@@ -7,16 +7,18 @@ class ListItem extends Component {
     this.state = {
       
     };
+    this.handleDelete = this.handleDelete.bind(this);
   }
-  handleDelete(id) {
-    console.log(id);
+   handleDelete=(id) => {
+    this.props.onDelete(id)
   }
+
 
   render() {
     
-    const {item} = this.props;
+    const item = this.props.item;
     const {index} = this.props;
-    
+   
     
     return (
       <tr>

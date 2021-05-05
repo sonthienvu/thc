@@ -8,11 +8,14 @@ class List extends Component {
           
         };
     }
+    deleteItem=(id)=>{
+        this.props.onDelete(id)
+    }
     render() {
         const items = this.props.items;
         const elmItem = items.map((item, index)=> {
             return (
-                <ListItem key={index} item={item} index={index}/>
+                <ListItem key={index} item={item} index={index} onDelete={this.deleteItem} />
             );
         });
         return (

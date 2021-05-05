@@ -5,17 +5,38 @@ import Form from "./components/Form";
 import List from "./components/List";
 import items from "./components/mocks/tasks";
 
+const { v4: uuidv4 } = require('uuid');
+
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       items: items,
+
+
     };
   }
-  handleDelete(id) {
+  handleDelete = (id) =>{
+    const itemSelect = this.state.items.findIndex(itemm=>itemm.id===id);
+    this.state.items.splice(itemSelect,1);
+    this.setState({...this.state, items:this.state.items})
+  }
+  handleSubmit=(user)=> {
+    let {items} = this.state;
+    items.push({
+      id : uuidv4(),
+      name : user.name,
+      age : user.age,
+      email : user.email,
+      phone : user.phone,
+    })
+    this.setState({
+      items : items
+    })
 
   }
+
   render() {
     let items = this.state.items;
     return (
@@ -23,14 +44,13 @@ class App extends Component {
 
         <Title />
 
-        <Form />
+        <Form onClickSubmit = {this.handleSubmit} />
         
         <List 
-        onClickDelete={this.handleDelete}
+        onDelete = {this.handleDelete}
         items={items}/>
       </div>
     );
   }
 }
-
 export default App;
