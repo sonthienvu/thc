@@ -7,14 +7,12 @@ import items from "./components/mocks/tasks";
 
 const { v4: uuidv4 } = require('uuid');
 
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       items: items,
-
-
+      itemSelected: null
     };
   }
   handleDelete = (id) =>{
@@ -24,30 +22,54 @@ class App extends Component {
   }
   handleSubmit=(user)=> {
     let {items} = this.state;
-    items.push({
-      id : uuidv4(),
-      name : user.name,
-      age : user.age,
-      email : user.email,
-      phone : user.phone,
-    })
+    if (user.id !== '') {
+      items.forEach((elm,key) => {
+        if (elm.id === user.id) {
+          items[key].name = user.name;
+          items[key].age = user.age;
+          items[key].email = user.email;
+          items[key].phone = user.phone;
+        }
+      })
+    } else {
+        items.push({
+        id : uuidv4(),
+        name : user.name,
+        age : user.age,
+        email : user.email,
+        phone : user.phone,
+      })
+    }
     this.setState({
-      items : items
+      
+      items : items,
     })
-
   }
+  handleEdit = item => {
+    this.setState({
+      itemSelected : item
+
+    });
+  }
+
+  
 
   render() {
     let items = this.state.items;
+    let itemSelected = this.state.itemSelected;
     return (
       <div className="App container">
 
         <Title />
 
-        <Form onClickSubmit = {this.handleSubmit} />
+        <Form 
+        itemSelected={itemSelected} 
+        onClickSubmit = {this.handleSubmit}
+        />
         
         <List 
         onDelete = {this.handleDelete}
+        onClickEdit ={this.handleEdit}
         items={items}/>
       </div>
     );

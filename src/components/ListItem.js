@@ -7,18 +7,24 @@ class ListItem extends Component {
     this.state = {
       
     };
-    this.handleDelete = this.handleDelete.bind(this);
+  this.handleDelete = this.handleDelete.bind(this);
+  this.handleEdit = this.handleEdit.bind(this);
+
+
   }
-   handleDelete=(id) => {
+  handleDelete = id => {
     this.props.onDelete(id)
   }
 
+  handleEdit = item => {
+    this.props.onClickEdit(item);
+  }
+
+
 
   render() {
-    
     const item = this.props.item;
     const {index} = this.props;
-   
     
     return (
       <tr>
@@ -28,7 +34,7 @@ class ListItem extends Component {
         <td>{ item.email }</td>
         <td>{ item.phone }</td>
         <td>
-          <button type="button" className="btn btn-primary">Edit</button>
+          <button onClick={()=>this.handleEdit(item)} type="button" className="btn btn-primary">Edit</button>
         </td>
         <td>
         <button onClick={()=>this.handleDelete(item.id)} type="button" className="btn btn-primary">Delete</button>

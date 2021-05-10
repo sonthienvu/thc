@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ListItem from "./ListItem"
+import items from "./mocks/tasks";
 
 class List extends Component {
     constructor(props) {
@@ -11,11 +12,21 @@ class List extends Component {
     deleteItem=(id)=>{
         this.props.onDelete(id)
     }
+    editItem = item => {
+        this.props.onClickEdit(item)
+    }
+
     render() {
         const items = this.props.items;
         const elmItem = items.map((item, index)=> {
             return (
-                <ListItem key={index} item={item} index={index} onDelete={this.deleteItem} />
+                <ListItem 
+                key={index} 
+                item={item} 
+                index={index} 
+                onDelete={this.deleteItem}
+                onClickEdit = {this.editItem}
+                />
             );
         });
         return (
